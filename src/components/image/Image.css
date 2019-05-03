@@ -1,0 +1,44 @@
+.Image-Caption {
+  font-size: 3rem;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  display: none;
+  z-index: 1001;
+  text-align: center;
+}
+
+.Image-Caption,
+.Image-Caption:focus,
+.Image-Caption:active {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.Image {
+  position: relative;
+}
+
+.Image:hover::after {
+  content: '';
+  display: block;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.Image:hover .Image-Caption {
+  display: block;
+}
+
+.Image-Img {
+  max-width: 100%;
+}
