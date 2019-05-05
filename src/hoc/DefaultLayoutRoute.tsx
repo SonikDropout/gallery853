@@ -2,7 +2,14 @@ import React from 'react'
 import { Route, RouteProps } from 'react-router-dom'
 import Header from '../components/header/Header'
 
-const DefaultLayout = ({ component: Component, ...rest }: RouteProps) => {
+interface IDefaultLayoutProps extends RouteProps {
+  component: React.FC<any>
+}
+
+const DefaultLayout = ({
+  component: Component,
+  ...rest
+}: IDefaultLayoutProps) => {
   return (
     <Route
       {...rest}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { cn } from '@bem-react/classname'
 import './Image.css'
 
-const cnImage = cn('Image')
+export const cnImage = cn('Image')
 
 interface IImageProps {
   src: string

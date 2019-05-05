@@ -2,21 +2,23 @@ import { IImageRow, IImage } from '../../models/galleryModels'
 import { combineReducers } from 'redux'
 import {
   GalleryActionTypes,
-  SET_VISIBLE_ROWS,
-  APPEND_VISIBLE_ROWS,
+  SET_VISIBLE_ROWS_RANGE,
+  EXTEND_VISIBLE_ROWS_RANGE,
   SET_IMAGES,
-  SET_ROWS
+  SET_ROWS,
+  IGalleryState
 } from './types'
+import Range, { IRange } from '../../utils/range'
 
-const imageRowReducer = (
-  state: IImageRow[] = [],
+const visibleRowsRangeReducer = (
+  state: IRange = new Range(0, 0),
   action: GalleryActionTypes
 ) => {
   switch (action.type) {
-    case SET_VISIBLE_ROWS:
+    case SET_VISIBLE_ROWS_RANGE:
       return action.payload
-    case APPEND_VISIBLE_ROWS:
-      return state.concat(action.payload)
+    case EXTEND_VISIBLE_ROWS_RANGE:
+      return state.extendUpBy(action.payload)
     default:
       return state
   }
@@ -31,10 +33,7 @@ const imageReducer = (state: IImage[] = [], action: GalleryActionTypes) => {
   }
 }
 
-const imageVisibleRowsReducer = (
-  state: IImageRow[] = [],
-  action: GalleryActionTypes
-) => {
+const rowsReducer = (state: IImageRow[] = [], action: GalleryActionTypes) => {
   switch (action.type) {
     case SET_ROWS:
       return action.payload
@@ -43,8 +42,8 @@ const imageVisibleRowsReducer = (
   }
 }
 
-export default combineReducers({
+export default combineReducers<IGalleryState, GalleryActionTypes>({
   images: imageReducer,
-  rows: imageRowReducer,
-  visibleRows: imageVisibleRowsReducer
+  rows: rowsReducer,
+  visibleRowsRange: visibleRowsRangeReducer
 })
